@@ -27,6 +27,7 @@ const Home = () => {
       <p>Welcome to our store!</p>
       <Section>
         <Input
+          className="w-full mb-8"
           onChange={(e) => setQuery(e.target.value)}
           value={query}
           placeholder="Search..."
