@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-import { ProductResponse } from "./interfaces";
+import { ProductResponse } from "../interfaces";
 import { useData } from "../hooks/useData";
 
 const ProductPage = () => {

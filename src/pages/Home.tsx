@@ -1,7 +1,8 @@
 import { NavLink } from "react-router-dom";
 
-import { Product, ProductsResponse } from "./interfaces";
+import { Product, ProductsResponse } from "../interfaces";
 import { useData } from "../hooks/useData";
+import ProductCard from "../components/ProductCard";
 
 const Home = () => {
   const { data: products, status } = useData<ProductsResponse>(
@@ -23,7 +24,7 @@ const Home = () => {
       <h1>Home</h1>
       <p>Welcome to our store!</p>
       {products?.data.map((product: Product) => {
-        return <NavLink to={`/product/${product.id}`}>{product.title}</NavLink>;
+        return <ProductCard key={product.id} product={product} />;
       })}
     </div>
   );
