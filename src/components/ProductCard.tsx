@@ -13,13 +13,19 @@ const ProductCard = ({ product }: ProductCardProps) => {
   console.log(discount);
 
   return (
-    <article>
-      <img src={product.image.url} alt={product.image.alt} />
+    <article className="relative">
+      <img className="" src={product.image.url} alt={product.image.alt} />
       <h2>{product.title}</h2>
-      <p>{product.price},-</p>
-      <p>
-        {product.discountedPrice} {discount}%
-      </p>
+      {isDiscounted ? (
+        <p className="text-red-500">{product.discountedPrice},-</p>
+      ) : (
+        <p>{product.price},-</p>
+      )}
+      {isDiscounted && (
+        <div className="rounded-full bg-red-500 text-white flex justify-center items-center h-12 w-12">
+          {discount}%
+        </div>
+      )}
     </article>
   );
 };
