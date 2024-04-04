@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { Product, ProductsResponse } from "../interfaces";
 import { useData } from "../hooks/useData";
 import ProductCard from "../components/ProductCard";
