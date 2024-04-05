@@ -3,7 +3,7 @@ interface Image {
   alt: string;
 }
 
-interface Review {
+export interface Review {
   description: string;
   rating: number;
   id: string;

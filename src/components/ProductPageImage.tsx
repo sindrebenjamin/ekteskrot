@@ -28,7 +28,7 @@ const ProductPageImage = ({
 
   return (
     <div
-      className="relative cursor-zoom-in aspect-square bg-center bg-no-repeat mb-6 border-[1px] border-bosch-blue-50 rounded-sm"
+      className="relative cursor-zoom-in aspect-square bg-center bg-no-repeat border-[1px] border-amber-50 rounded-sm"
       onMouseMove={(e) => handleMouseMove(e)}
       onMouseLeave={handleMouseLeave}
       style={{

@@ -7,10 +7,10 @@ export const Container = tw.div`
 
 export const Section = tw.section`
 px-4 
-py-14
+py-12
 sm:px-6
-sm:py-20
-lg:py-28
+
+
 `;
 
 export const Textarea = tw.textarea`

@@ -23,15 +23,29 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Home</h1>
-      <p>Welcome to our store!</p>
       <Section>
-        <Input
-          className="w-full mb-8"
-          onChange={(e) => setQuery(e.target.value)}
-          value={query}
-          placeholder="Search..."
-        />
+        <Container>
+          <picture>
+            <source
+              media="(max-width:768px)"
+              srcSet="/banner_mobile.png"
+            ></source>
+            <source media="(min-width:768px)" srcSet="/banner.png"></source>
+            <img
+              className="rounded mb-12"
+              src="/banner_mobile.png"
+              alt="Woman gleefully sifting through garbage"
+            />
+          </picture>
+
+          <Input
+            className="w-full mb-8"
+            onChange={(e) => setQuery(e.target.value)}
+            value={query}
+            placeholder="Search..."
+          />
+        </Container>
+
         <Container className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
           {products?.data
             .filter((product) =>
