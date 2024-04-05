@@ -8,7 +8,7 @@ interface ButtonProps {
 const Button = ({ size, color, hoverState, children }: ButtonProps) => {
   return (
     <button
-      className={`${size} ${color} ${hoverState} rounded-sm transition-colors ease-in-out duration-100 flex justify-center items-center gap-2.5`}
+      className={`${size} ${color} ${hoverState} rounded-sm transition-colors ease-in-out duration-100 flex justify-center items-center gap-1 font-bold`}
     >
       {children}
     </button>

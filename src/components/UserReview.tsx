@@ -12,7 +12,7 @@ const UserReview = ({
 
   return (
     <div
-      className={`${reviewClasses} p-4 bg-gray-50 border-t flex flex-col gap-2`}
+      className={`${reviewClasses} p-4 bg-gray-50 border-t flex flex-col gap-2 `}
     >
       <div className="flex justify-between items-center">
         <p className="font-bold">{review.username}</p>
