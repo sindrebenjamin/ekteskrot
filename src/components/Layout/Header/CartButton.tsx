@@ -1,6 +1,12 @@
+import { useContext } from "react";
+import { CartContext } from "../../../context/CartContext";
+
 import { NavLink } from "react-router-dom";
 
 const CartButton = () => {
+  const cartContext = useContext(CartContext)!;
+
+  const amountOfItems = cartContext.cart.length;
   return (
     <NavLink
       to="/cart"
@@ -8,7 +14,7 @@ const CartButton = () => {
     >
       <CartSVG />
       <span className="absolute top-[-6px] right-[-6px] bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
-        0
+        {amountOfItems}
       </span>
     </NavLink>
   );

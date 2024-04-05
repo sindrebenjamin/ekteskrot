@@ -22,8 +22,8 @@ const Home = () => {
   }
 
   return (
-    <div>
-      <Section>
+    <main className="min-h-screen">
+      <Section $noXPadding={false}>
         <Container>
           <picture>
             <source
@@ -56,7 +56,7 @@ const Home = () => {
             })}
         </Container>
       </Section>
-    </div>
+    </main>
   );
 };
 

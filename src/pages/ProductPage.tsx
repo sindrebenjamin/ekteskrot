@@ -1,4 +1,6 @@
 import { useParams } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 import { Container, Section } from "../components/TailwindComponents";
 import { ProductResponse } from "../interfaces";
@@ -11,6 +13,7 @@ import Button from "../components/Button";
 
 const ProductPage = () => {
   const params = useParams();
+  const { cart, setCart } = useContext(CartContext)!;
   const { data: product, status } = useData<ProductResponse>(
     `https://v2.api.noroff.dev/online-shop/${params.id}`
   );
@@ -19,7 +22,11 @@ const ProductPage = () => {
   let isDiscounted = false;
   let discount;
 
-  console.log(product);
+  console.log(product?.data);
+
+  function handleAddItemToCart(item: any) {
+    setCart([...cart, item]);
+  }
 
   if (status === "loading") {
     return <p>Loading...</p>;
@@ -64,6 +71,7 @@ const ProductPage = () => {
             </div>
             <p>{product?.data.description}</p>
             <Button
+              onClick={() => handleAddItemToCart(product?.data)}
               size="w-fit px-12 py-4 mt-3"
               color="bg-amber-600 text-white"
               hoverState="hover:bg-amber-700"
