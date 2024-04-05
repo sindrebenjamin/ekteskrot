@@ -1,12 +1,20 @@
 import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import CartProductCard from "../components/CartProductCard";
-import { Container, Section } from "../components/TailwindComponents";
+import {
+  Container,
+  Section,
+  StyledH1,
+  StyledH2,
+} from "../components/TailwindComponents";
+import { Product } from "../interfaces";
 
 const Cart = () => {
   const { cart, setCart } = useContext(CartContext)!;
 
-  function handleDeleteItemFromCart(item) {
+  console.log(cart);
+
+  function handleDeleteItemFromCart(item: Product) {
     const nextItems = cart.filter((i) => i.id !== item.id);
     setCart(nextItems);
   }
@@ -15,7 +23,7 @@ const Cart = () => {
     <div>
       <Section $noXPadding={true}>
         <Container>
-          <h1>Cart</h1>
+          <StyledH1>Cart</StyledH1>
           <div className="sm:rounded overflow-hidden sm:border-l sm:border-r">
             {cart.map((item, index) => {
               return (
@@ -27,6 +35,9 @@ const Cart = () => {
                 />
               );
             })}
+          </div>
+          <div className="bg-gray-50 p-4 border">
+            <StyledH2>Summary</StyledH2>
           </div>
         </Container>
       </Section>

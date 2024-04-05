@@ -30,3 +30,15 @@ p-3
 focus:outline-none
 focus:border-amber-500
 `;
+
+export const StyledH1 = tw.h1`
+text-3xl 
+md:text-4xl 
+font-bold
+`;
+
+export const StyledH2 = tw.h2`
+text-2xl 
+font-bold 
+mb-4
+`;

@@ -1,4 +1,7 @@
 import { Product } from "../interfaces";
+import QuantitySelector from "./QuantitySelector";
+import { useContext, useState } from "react";
+import { CartContext } from "../context/CartContext";
 
 const CartProductCard = ({
   product,
@@ -9,7 +12,13 @@ const CartProductCard = ({
   isFirst: boolean;
   handleDelete: any;
 }) => {
+  const { cart, setCart } = useContext(CartContext)!;
   const cardClasses = isFirst ? "border-t" : "";
+
+  function handleQuantity(q) {
+    const newCart = cart.filter((item) => item.id !== product.id);
+    setCart([...newCart, { ...product, quantity: q }]);
+  }
 
   return (
     <div className={`${cardClasses} p-4 bg-gray-50 border-b`}>
@@ -30,7 +39,10 @@ const CartProductCard = ({
           alt={product.image.alt}
         />
       </div>
-
+      <QuantitySelector
+        quantity={product.quantity}
+        handleQuantity={handleQuantity}
+      />
       <p className="font-bold">{product.price},-</p>
     </div>
   );

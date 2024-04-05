@@ -15,6 +15,9 @@ const ProductPageImage = ({
     scale: 1,
   });
 
+  let zoomActive =
+    zoomCoordinates.x === 0 && zoomCoordinates.y === 0 ? false : true;
+
   function handleMouseMove(e: any) {
     const { left, top, width, height } = e.target.getBoundingClientRect();
     const x = ((e.pageX - left) / width) * 100;
@@ -28,12 +31,14 @@ const ProductPageImage = ({
 
   return (
     <div
-      className="max-w-[600px] relative cursor-zoom-in aspect-square bg-center bg-no-repeat border-[1px] border-amber-50 rounded-sm w-full"
+      className="max-w-[600px] relative cursor-zoom-in aspect-square bg-center bg-cover bg-no-repeat border-[1px] border-amber-50 rounded-sm w-full"
       onMouseMove={(e) => handleMouseMove(e)}
       onMouseLeave={handleMouseLeave}
       style={{
         backgroundImage: `url(${imageUrl})`,
-        backgroundSize: `${zoomCoordinates.scale * 100}%`,
+        backgroundSize: zoomActive
+          ? `${zoomCoordinates.scale * 100}%`
+          : "cover",
         backgroundPosition: `${zoomCoordinates.x}% ${zoomCoordinates.y}%`,
       }}
     >

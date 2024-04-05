@@ -20,6 +20,7 @@ export interface Product {
   rating: number;
   reviews: Review[];
   tags: string[];
+  quantity: number;
 }
 
 interface Meta {
