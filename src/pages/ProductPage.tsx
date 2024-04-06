@@ -29,6 +29,7 @@ const ProductPage = () => {
   const noReviews = product?.data.reviews.length === 0;
   let isDiscounted = false;
   let discount;
+  const productData = product?.data;
 
   function handleAddItemToCart(item: Product) {
     const itemInCart = cart.find((i) => i.id === item.id);
@@ -103,7 +104,7 @@ const ProductPage = () => {
                 handleQuantity={setQuantity}
               />
               <Button
-                onClick={() => handleAddItemToCart(product?.data)}
+                onClick={() => productData && handleAddItemToCart(productData)}
                 size="w-full max-w-[150px] py-3"
                 color="bg-amber-600 text-white"
                 hoverState="hover:bg-amber-700"

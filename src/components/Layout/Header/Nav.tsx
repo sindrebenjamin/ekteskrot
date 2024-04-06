@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 interface NavProps {
   isOpen: boolean;
-  setIsOpen: (() => void) | null | undefined;
+  setIsOpen: ((isOpen: boolean) => void) | null | undefined;
 }
 
 const Nav = ({ isOpen, setIsOpen }: NavProps) => {
@@ -34,7 +34,7 @@ export default Nav;
 interface NavigationLinkProps {
   linkTo: string;
   children: React.ReactNode;
-  setIsOpen: (() => void) | null | undefined;
+  setIsOpen: ((isOpen: boolean) => void) | null | undefined;
 }
 
 interface NavLinkProps {
@@ -48,13 +48,15 @@ const NavigationLink = ({
 }: NavigationLinkProps) => {
   const getClassName = ({ isActive }: NavLinkProps) =>
     isActive ? "underline" : "";
+
+  const handleClick = () => {
+    if (setIsOpen) {
+      setIsOpen(false);
+    }
+  };
   return (
     <li className="duration-100 transition-opacity opacity-100 hover:opacity-50">
-      <NavLink
-        onClick={() => setIsOpen(false)}
-        className={getClassName}
-        to={linkTo}
-      >
+      <NavLink onClick={handleClick} className={getClassName} to={linkTo}>
         {children}
       </NavLink>
     </li>

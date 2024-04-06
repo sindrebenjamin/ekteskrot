@@ -10,7 +10,7 @@ const CartProductCard = ({
 }: {
   product: Product;
   isFirst: boolean;
-  handleDelete: (() => void) | null | undefined;
+  handleDelete: ((product: Product) => void) | null | undefined;
 }) => {
   const { cart, setCart } = useContext(CartContext)!;
   const cardClasses = isFirst ? "border-t" : "";
@@ -31,7 +31,11 @@ const CartProductCard = ({
         <div className="flex flex-col gap-6 items-start">
           <p>{product.title}</p>
           <button
-            onClick={() => handleDelete(product)}
+            onClick={() => {
+              if (handleDelete) {
+                handleDelete(product);
+              }
+            }}
             className="text-amber-600 hover:text-amber-700 transition-colors duration-100 font-bold"
           >
             Fjern

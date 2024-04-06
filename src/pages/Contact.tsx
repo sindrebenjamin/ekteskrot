@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 import {
   Input,
   TextArea,
@@ -5,84 +7,79 @@ import {
   Section,
   Container,
 } from "../components/TailwindComponents";
-import { useState } from "react";
 import Button from "../components/Button";
 
 const Contact = () => {
   const [error, setError] = useState("");
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = (e.target as HTMLInputElement).form;
-    if (form) {
-      const formData = new FormData(form);
-      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-      const emailValue = formData.get("email");
+    const formData = new FormData(e.currentTarget);
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const emailValue = formData.get("email");
 
-      setError("");
-      let errorFlag = false;
+    setError("");
+    let errorFlag = false;
 
-      if (checkStringLength(formData, "full-name") < 3) {
-        setError("Name must be at least 3 characters.");
-        errorFlag = true;
-      }
-      if (checkStringLength(formData, "subject") < 3) {
-        setError("Subject must be at least 3 characters.");
-        errorFlag = true;
-      }
-      if (typeof emailValue === "string") {
-        if (!emailRegex.test(emailValue)) {
-          setError("Must be a valid email.");
-          errorFlag = true;
-        }
-      }
-      if (checkStringLength(formData, "body") < 3) {
-        setError("Message must be at least 3 characters.");
-        errorFlag = true;
-      }
-      if (!errorFlag) {
-        for (const [key, value] of formData.entries()) {
-          console.log(`${key}: ${value}`);
-        }
+    if (checkStringLength(formData, "full-name") < 3) {
+      setError("Name must be at least 3 characters.");
+      errorFlag = true;
+    } else if (checkStringLength(formData, "subject") < 3) {
+      setError("Subject must be at least 3 characters.");
+      errorFlag = true;
+    } else if (typeof emailValue === "string" && !emailRegex.test(emailValue)) {
+      setError("Must be a valid email.");
+      errorFlag = true;
+    } else if (checkStringLength(formData, "body") < 3) {
+      setError("Message must be at least 3 characters.");
+      errorFlag = true;
+    }
+
+    if (!errorFlag) {
+      console.log("Form submission is valid, form data:");
+      for (const [key, value] of formData.entries()) {
+        console.log(`${key}: ${value}`);
       }
     }
-  }
+  };
 
-  function checkStringLength(formData: FormData, fieldName: string) {
+  const checkStringLength = (formData: FormData, fieldName: string) => {
     const value = formData.get(fieldName);
-    if (typeof value === "string") {
-      return value.length;
-    }
-    return 0;
-  }
+    return typeof value === "string" ? value.length : 0;
+  };
+
   return (
     <main>
       <Section $noXPadding={false} className="">
         <Container className="flex justify-center items-center h-screen max-w-[500px]">
-          <form action="" className="w-full flex flex-col gap-4">
+          <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
             <StyledH1>Contact</StyledH1>
             <ContactInput
               id="full-name"
+              name="full-name"
               title="Full name"
               placeholder="Enter your full name"
             />
             <ContactInput
               id="subject"
+              name="subject"
               title="Subject"
               placeholder="What you want to talk about?"
             />
             <ContactInput
               id="email"
+              name="email"
               title="Email"
               placeholder="Where can we reach you?"
             />
             <ContactInputTextArea
               id="body"
+              name="body"
               title="Message"
               placeholder="What is your story?"
             />
             <Button
-              onClick={handleSubmit}
+              type="submit"
               size="py-3.5 w-full"
               color="bg-amber-700 text-white"
               hoverState="hover:bg-amber-800"
@@ -103,36 +100,33 @@ interface ContactInputProps {
   id: string;
   title: string;
   placeholder: string;
+  name: string;
 }
 
-const ContactInput: React.FC<ContactInputProps> = ({
-  id,
-  title,
-  placeholder,
-}) => {
-  return (
-    <div className="flex flex-col ">
-      <label htmlFor={id}>{title}</label>
-      <Input required name={id} id={id} placeholder={placeholder} />
-    </div>
-  );
-};
+const ContactInput = ({ id, name, title, placeholder }: ContactInputProps) => (
+  <div className="flex flex-col ">
+    <label htmlFor={id}>{title}</label>
+    <Input required name={name} id={id} placeholder={placeholder} />
+  </div>
+);
 
 interface ContactInputTextAreaProps {
   id: string;
   title: string;
   placeholder: string;
+  name: string;
 }
 
-const ContactInputTextArea: React.FC<ContactInputTextAreaProps> = ({
+const ContactInputTextArea = ({
   id,
+  name,
   title,
   placeholder,
-}) => {
-  return (
-    <div className="flex flex-col ">
-      <label htmlFor={id}>{title}</label>
-      <TextArea required name={id} id={id} placeholder={placeholder} />
-    </div>
-  );
-};
+}: ContactInputTextAreaProps) => (
+  <div className="flex flex-col ">
+    <label htmlFor={id}>{title}</label>
+    <TextArea required name={name} id={id} placeholder={placeholder} />
+  </div>
+);
+
+// Ensure your `Input` and `TextArea` components properly handle the `name` prop.

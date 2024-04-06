@@ -82,7 +82,6 @@ const Cart = () => {
                   color="border-2 border-amber-600 text-amber-700"
                   hoverState="hover:bg-amber-800 hover:border-amber-800 hover:text-white"
                   linkTo={"/"}
-                  onClick=""
                 >
                   Keep shopping
                 </ButtonLink>

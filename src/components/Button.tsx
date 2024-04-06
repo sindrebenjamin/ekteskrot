@@ -6,6 +6,7 @@ interface ButtonProps {
   hoverState: string;
   children: React.ReactNode;
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  type?: "submit" | "reset" | "button";
 }
 
 const Button = ({
@@ -14,9 +15,11 @@ const Button = ({
   hoverState,
   children,
   onClick,
+  type,
 }: ButtonProps) => {
   return (
     <button
+      type={type}
       onClick={onClick}
       className={`${size} ${color} ${hoverState} rounded-sm transition-colors ease-in-out duration-100 flex justify-center items-center gap-1 font-bold`}
     >
