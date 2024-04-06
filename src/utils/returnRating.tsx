@@ -1,4 +1,4 @@
-export function returnRating(rating) {
+export function returnRating(rating: number) {
   switch (rating) {
     case 0:
     case 0.5:
