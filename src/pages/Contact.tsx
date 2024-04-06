@@ -11,41 +11,44 @@ import Button from "../components/Button";
 const Contact = () => {
   const [error, setError] = useState("");
 
-  function handleSubmit(e: any) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const formData = new FormData(e.target.form);
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const emailValue = formData.get("email");
+    const form = (e.target as HTMLInputElement).form;
+    if (form) {
+      const formData = new FormData(form);
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      const emailValue = formData.get("email");
 
-    setError("");
-    let errorFlag = false;
+      setError("");
+      let errorFlag = false;
 
-    if (checkStringLength(formData, "full-name") < 3) {
-      setError("Name must be at least 3 characters.");
-      errorFlag = true;
-    }
-    if (checkStringLength(formData, "subject") < 3) {
-      setError("Subject must be at least 3 characters.");
-      errorFlag = true;
-    }
-    if (typeof emailValue === "string") {
-      if (!emailRegex.test(emailValue)) {
-        setError("Must be a valid email.");
+      if (checkStringLength(formData, "full-name") < 3) {
+        setError("Name must be at least 3 characters.");
         errorFlag = true;
       }
-    }
-    if (checkStringLength(formData, "body") < 3) {
-      setError("Message must be at least 3 characters.");
-      errorFlag = true;
-    }
-    if (!errorFlag) {
-      for (let [key, value] of formData.entries()) {
-        console.log(`${key}: ${value}`);
+      if (checkStringLength(formData, "subject") < 3) {
+        setError("Subject must be at least 3 characters.");
+        errorFlag = true;
+      }
+      if (typeof emailValue === "string") {
+        if (!emailRegex.test(emailValue)) {
+          setError("Must be a valid email.");
+          errorFlag = true;
+        }
+      }
+      if (checkStringLength(formData, "body") < 3) {
+        setError("Message must be at least 3 characters.");
+        errorFlag = true;
+      }
+      if (!errorFlag) {
+        for (const [key, value] of formData.entries()) {
+          console.log(`${key}: ${value}`);
+        }
       }
     }
   }
 
-  function checkStringLength(formData: any, fieldName: string) {
+  function checkStringLength(formData: FormData, fieldName: string) {
     const value = formData.get(fieldName);
     if (typeof value === "string") {
       return value.length;

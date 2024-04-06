@@ -30,7 +30,7 @@ const Header = () => {
         <CartButton />
         <div
           onClick={() => setIsOpen(false)}
-          className={`${overlayClasses} bg-black bg-opacity-60 h-screen w-full left-0 top-0 absolute transition-all duration-200 z-30`}
+          className={`${overlayClasses} bg-black bg-opacity-60 h-screen w-full left-0 top-0 absolute transition-all duration-200 z-[30]`}
         ></div>
       </Container>
     </header>

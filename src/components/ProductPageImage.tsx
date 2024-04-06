@@ -15,11 +15,12 @@ const ProductPageImage = ({
     scale: 1,
   });
 
-  let zoomActive =
+  const zoomActive =
     zoomCoordinates.x === 0 && zoomCoordinates.y === 0 ? false : true;
 
-  function handleMouseMove(e: any) {
-    const { left, top, width, height } = e.target.getBoundingClientRect();
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    const target = e.target as HTMLElement;
+    const { left, top, width, height } = target.getBoundingClientRect();
     const x = ((e.pageX - left) / width) * 100;
     const y = ((e.pageY - top) / height) * 100;
     setZoomCoordinates({ x: x, y: y, scale: 1.5 });

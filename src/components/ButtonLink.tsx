@@ -1,12 +1,13 @@
 import { NavLink } from "react-router-dom";
+import { MouseEventHandler } from "react";
 
 interface ButtonLinkProps {
   size: string;
   color: string;
   hoverState: string;
   children: React.ReactNode;
-  linkTo: any;
-  onClick: any;
+  linkTo: string;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
 }
 
 const ButtonLink = ({

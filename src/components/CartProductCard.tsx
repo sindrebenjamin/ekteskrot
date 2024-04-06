@@ -10,7 +10,7 @@ const CartProductCard = ({
 }: {
   product: Product;
   isFirst: boolean;
-  handleDelete: any;
+  handleDelete: (() => void) | null | undefined;
 }) => {
   const { cart, setCart } = useContext(CartContext)!;
   const cardClasses = isFirst ? "border-t" : "";

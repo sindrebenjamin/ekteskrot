@@ -18,7 +18,7 @@ const Cart = () => {
     setCart(nextItems);
   }
 
-  function getTotalSum(products: any) {
+  function getTotalSum(products: Product[]) {
     const total = products.reduce((total: number, product: Product) => {
       return total + product.price * product.quantity;
     }, 0);

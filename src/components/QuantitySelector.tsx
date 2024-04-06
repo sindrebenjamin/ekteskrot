@@ -3,9 +3,9 @@ const QuantitySelector = ({
   handleQuantity,
 }: {
   quantity: number;
-  handleQuantity: any;
+  handleQuantity: (newQuantity: number) => void;
 }) => {
-  function handleChange(e: any) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = parseInt(e.target.value, 10);
 
     if (e.target.value === "") {

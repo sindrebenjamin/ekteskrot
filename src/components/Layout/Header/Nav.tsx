@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 interface NavProps {
   isOpen: boolean;
-  setIsOpen: any;
+  setIsOpen: (() => void) | null | undefined;
 }
 
 const Nav = ({ isOpen, setIsOpen }: NavProps) => {
@@ -34,7 +34,7 @@ export default Nav;
 interface NavigationLinkProps {
   linkTo: string;
   children: React.ReactNode;
-  setIsOpen: any;
+  setIsOpen: (() => void) | null | undefined;
 }
 
 interface NavLinkProps {

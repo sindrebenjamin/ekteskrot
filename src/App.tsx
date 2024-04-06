@@ -9,9 +9,10 @@ import CheckoutSuccess from "./pages/CheckoutSuccess";
 import Contact from "./pages/Contact";
 import PageNotFound from "./pages/PageNotFound";
 import { CartContext } from "./context/CartContext";
+import { Product } from "./interfaces";
 
 function App() {
-  const [cart, setCart] = useState<any[]>([]);
+  const [cart, setCart] = useState<Product[]>([]);
   return (
     <>
       <CartContext.Provider value={{ cart, setCart }}>

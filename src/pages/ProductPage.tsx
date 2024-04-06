@@ -16,6 +16,7 @@ import ProductPageImage from "../components/ProductPageImage";
 import UserReview from "../components/UserReview";
 import Button from "../components/Button";
 import QuantitySelector from "../components/QuantitySelector";
+import { Product } from "../interfaces";
 
 const ProductPage = () => {
   const params = useParams();
@@ -29,7 +30,7 @@ const ProductPage = () => {
   let isDiscounted = false;
   let discount;
 
-  function handleAddItemToCart(item: any) {
+  function handleAddItemToCart(item: Product) {
     const itemInCart = cart.find((i) => i.id === item.id);
 
     if (itemInCart) {
