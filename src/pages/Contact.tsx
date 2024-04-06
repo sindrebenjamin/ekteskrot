@@ -1,5 +1,6 @@
 import {
   Input,
+  TextArea,
   StyledH1,
   Section,
   Container,
@@ -72,7 +73,7 @@ const Contact = () => {
               title="Email"
               placeholder="Where can we reach you?"
             />
-            <ContactInput
+            <ContactInputTextArea
               id="body"
               title="Message"
               placeholder="What is your story?"
@@ -110,6 +111,25 @@ const ContactInput: React.FC<ContactInputProps> = ({
     <div className="flex flex-col ">
       <label htmlFor={id}>{title}</label>
       <Input required name={id} id={id} placeholder={placeholder} />
+    </div>
+  );
+};
+
+interface ContactInputTextAreaProps {
+  id: string;
+  title: string;
+  placeholder: string;
+}
+
+const ContactInputTextArea: React.FC<ContactInputTextAreaProps> = ({
+  id,
+  title,
+  placeholder,
+}) => {
+  return (
+    <div className="flex flex-col ">
+      <label htmlFor={id}>{title}</label>
+      <TextArea required name={id} id={id} placeholder={placeholder} />
     </div>
   );
 };

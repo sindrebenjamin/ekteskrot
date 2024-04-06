@@ -32,6 +32,17 @@ focus:outline-none
 focus:border-amber-500
 `;
 
+export const TextArea = tw.textarea`
+w-full
+placeholder-gray-400
+rounded-sm
+border
+border-gray-300
+p-3
+focus:outline-none
+focus:border-amber-500
+`;
+
 export const StyledH1 = tw.h1`
 text-3xl 
 md:text-4xl 
