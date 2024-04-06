@@ -85,7 +85,7 @@ const Contact = () => {
             >
               Send
             </Button>
-            {error && <p>{error}</p>}
+            {error && <p className="text-red-600">{error}</p>}
           </form>
         </Container>
       </Section>

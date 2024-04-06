@@ -11,16 +11,6 @@ const Home = () => {
     "https://v2.api.noroff.dev/online-shop"
   );
 
-  //status: loading, success, error, idle
-
-  if (status === "loading") {
-    return <p>Loading...</p>;
-  }
-
-  if (status === "error") {
-    return <p>Something went wrong</p>;
-  }
-
   return (
     <main className="min-h-screen">
       <Section $noXPadding={false}>
@@ -45,16 +35,27 @@ const Home = () => {
             placeholder="Search..."
           />
         </Container>
-
-        <Container className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
-          {products?.data
-            .filter((product) =>
-              product.title.toLowerCase().includes(query.toLowerCase())
-            )
-            .map((product: Product) => {
-              return <ProductCard key={product.id} product={product} />;
-            })}
-        </Container>
+        {status === "success" && (
+          <Container className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
+            {products?.data
+              .filter((product) =>
+                product.title.toLowerCase().includes(query.toLowerCase())
+              )
+              .map((product: Product) => {
+                return <ProductCard key={product.id} product={product} />;
+              })}
+          </Container>
+        )}
+        {status === "loading" && (
+          <Container>
+            <p className="text-center">Loading...</p>
+          </Container>
+        )}
+        {status === "error" && (
+          <Container>
+            <p className="text-center">Something went wrong.</p>
+          </Container>
+        )}
       </Section>
     </main>
   );
