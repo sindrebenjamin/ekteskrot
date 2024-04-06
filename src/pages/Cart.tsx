@@ -37,6 +37,7 @@ const Cart = () => {
           <StyledH1 className="ml-4 sm:ml-0 mb-4 md:mb-6 lg:mb-8">
             Cart
           </StyledH1>
+          {cart.length < 1 && <p>This cart b EMPTY.</p>}
           <div className="md:flex md:justify-between md:gap-8 lg:gap-12">
             <div className="sm:rounded overflow-hidden sm:border-l sm:border-r h-fit w-full">
               {cart.map((item, index) => {
@@ -50,39 +51,43 @@ const Cart = () => {
                 );
               })}
             </div>
-            <div className="bg-gray-50 p-4 border sm:rounded mt-12 md:mt-0 h-fit w-full md:max-w-[500px]">
-              <StyledH2>Summary</StyledH2>
-              <div className="flex flex-col gap-4">
-                <SummaryLine
-                  extraClasses=""
-                  title="Subtotal"
-                  number={totalSum}
-                />
-                <SummaryLine extraClasses="" title="Shipping" number={100} />
-                <div className="h-[2px] bg-gray-200 my-1"></div>
-                <SummaryLine
-                  extraClasses="font-bold"
-                  title="Total"
-                  number={totalSum + 100}
-                />
+            {cart.length > 0 && (
+              <div className="bg-gray-50 p-4 border sm:rounded mt-12 md:mt-0 h-fit w-full md:max-w-[500px]">
+                <StyledH2>Summary</StyledH2>
+                <div className="flex flex-col gap-4">
+                  <SummaryLine
+                    extraClasses=""
+                    title="Subtotal"
+                    number={totalSum}
+                  />
+                  <SummaryLine extraClasses="" title="Shipping" number={100} />
+                  <div className="h-[2px] bg-gray-200 my-1"></div>
+                  <SummaryLine
+                    extraClasses="font-bold"
+                    title="Total"
+                    number={totalSum + 100}
+                  />
+                </div>
+                <ButtonLink
+                  linkTo={"/checkout"}
+                  size="w-full py-3 mb-2 mt-4 text-sm"
+                  color="bg-amber-700 text-white"
+                  hoverState="hover:bg-amber-800"
+                  onClick={() => setCart([])}
+                >
+                  Go to checkout
+                </ButtonLink>
+                <ButtonLink
+                  size="w-full py-3 text-sm"
+                  color="border-2 border-amber-600 text-amber-700"
+                  hoverState="hover:bg-amber-800 hover:border-amber-800 hover:text-white"
+                  linkTo={"/"}
+                  onClick=""
+                >
+                  Keep shopping
+                </ButtonLink>
               </div>
-              <ButtonLink
-                linkTo={"/checkout"}
-                size="w-full py-3 mb-2 mt-4 text-sm"
-                color="bg-amber-700 text-white"
-                hoverState="hover:bg-amber-800"
-              >
-                Go to checkout
-              </ButtonLink>
-              <ButtonLink
-                size="w-full py-3 text-sm"
-                color="border-2 border-amber-600 text-amber-700"
-                hoverState="hover:bg-amber-800 hover:border-amber-800 hover:text-white"
-                linkTo={"/"}
-              >
-                Keep shopping
-              </ButtonLink>
-            </div>
+            )}
           </div>
         </Container>
       </Section>
