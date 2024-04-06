@@ -22,6 +22,7 @@ focus:border-amber-500
 `;
 
 export const Input = tw.input`
+w-full
 placeholder-gray-400
 rounded-sm
 border
