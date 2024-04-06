@@ -13,8 +13,6 @@ import ButtonLink from "../components/ButtonLink";
 const Cart = () => {
   const { cart, setCart } = useContext(CartContext)!;
 
-  console.log(cart);
-
   function handleDeleteItemFromCart(item: Product) {
     const nextItems = cart.filter((i) => i.id !== item.id);
     setCart(nextItems);

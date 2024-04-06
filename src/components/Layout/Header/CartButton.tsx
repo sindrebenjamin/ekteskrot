@@ -15,8 +15,6 @@ const CartButton = () => {
 
   const totalQuantity = getTotalQuantity(cartContext.cart);
 
-  console.log(totalQuantity);
-
   return (
     <NavLink
       to="/cart"

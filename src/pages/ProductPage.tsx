@@ -29,8 +29,6 @@ const ProductPage = () => {
   let isDiscounted = false;
   let discount;
 
-  console.log(product?.data);
-
   function handleAddItemToCart(item: any) {
     const itemInCart = cart.find((i) => i.id === item.id);
 

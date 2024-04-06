@@ -9,7 +9,6 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
-  console.log(product);
   const isDiscounted = product.discountedPrice < product.price;
   const discount = calculateDiscount(product.price, product.discountedPrice);
 
