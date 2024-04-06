@@ -1,12 +1,22 @@
 import { useContext } from "react";
 import { CartContext } from "../../../context/CartContext";
+import { Product } from "../../../interfaces";
 
 import { NavLink } from "react-router-dom";
 
 const CartButton = () => {
   const cartContext = useContext(CartContext)!;
 
-  const amountOfItems = cartContext.cart.length;
+  function getTotalQuantity(products: any) {
+    return products.reduce((total: number, product: Product) => {
+      return total + product.quantity;
+    }, 0);
+  }
+
+  const totalQuantity = getTotalQuantity(cartContext.cart);
+
+  console.log(totalQuantity);
+
   return (
     <NavLink
       to="/cart"
@@ -14,7 +24,7 @@ const CartButton = () => {
     >
       <CartSVG />
       <span className="absolute top-[-6px] right-[-6px] bg-red-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
-        {amountOfItems}
+        {totalQuantity}
       </span>
     </NavLink>
   );

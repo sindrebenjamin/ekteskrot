@@ -1,6 +1,6 @@
 import { Product } from "../interfaces";
 import QuantitySelector from "./QuantitySelector";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
 const CartProductCard = ({
@@ -15,9 +15,14 @@ const CartProductCard = ({
   const { cart, setCart } = useContext(CartContext)!;
   const cardClasses = isFirst ? "border-t" : "";
 
-  function handleQuantity(q) {
-    const newCart = cart.filter((item) => item.id !== product.id);
-    setCart([...newCart, { ...product, quantity: q }]);
+  function handleQuantity(q: number) {
+    const nextCart = cart.map((item) => {
+      if (item.id === product.id) {
+        return { ...item, quantity: q };
+      }
+      return item;
+    });
+    setCart(nextCart);
   }
 
   return (

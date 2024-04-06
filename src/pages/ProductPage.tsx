@@ -35,13 +35,14 @@ const ProductPage = () => {
     const itemInCart = cart.find((i) => i.id === item.id);
 
     if (itemInCart) {
-      const newCart = cart.filter((i) => i.id !== item.id);
-      const nextItem = {
-        ...itemInCart,
-        quantity: itemInCart.quantity + quantity,
-      };
+      const nextCart = cart.map((i) => {
+        if (i.id === item.id) {
+          return { ...i, quantity: itemInCart.quantity + quantity };
+        }
+        return i;
+      });
 
-      setCart([...newCart, nextItem]);
+      setCart(nextCart);
     } else {
       setCart([...cart, { ...item, quantity: quantity }]);
     }

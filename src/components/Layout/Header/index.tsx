@@ -9,6 +9,12 @@ import { Container } from "../../TailwindComponents";
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  if (isOpen) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
+
   const overlayClasses = isOpen
     ? "visible opacity-100 z-[9]"
     : "invisible opacity-0";
@@ -24,7 +30,7 @@ const Header = () => {
         <CartButton />
         <div
           onClick={() => setIsOpen(false)}
-          className={`${overlayClasses} bg-black bg-opacity-60 h-screen w-full left-0 top-0 absolute transition-all duration-200`}
+          className={`${overlayClasses} bg-black bg-opacity-60 h-screen w-full left-0 top-0 absolute transition-all duration-200 z-30`}
         ></div>
       </Container>
     </header>

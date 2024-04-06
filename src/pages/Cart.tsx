@@ -8,6 +8,7 @@ import {
   StyledH2,
 } from "../components/TailwindComponents";
 import { Product } from "../interfaces";
+import ButtonLink from "../components/ButtonLink";
 
 const Cart = () => {
   const { cart, setCart } = useContext(CartContext)!;
@@ -19,30 +20,89 @@ const Cart = () => {
     setCart(nextItems);
   }
 
+  function getTotalSum(products: any) {
+    const total = products.reduce((total: number, product: Product) => {
+      return total + product.price * product.quantity;
+    }, 0);
+
+    return parseFloat(total.toFixed(2));
+  }
+
+  const totalSum = getTotalSum(cart);
+
   return (
-    <div>
+    <main className="min-h-screen">
       <Section $noXPadding={true}>
         <Container>
-          <StyledH1>Cart</StyledH1>
-          <div className="sm:rounded overflow-hidden sm:border-l sm:border-r">
-            {cart.map((item, index) => {
-              return (
-                <CartProductCard
-                  isFirst={index < 1}
-                  key={item.id}
-                  product={item}
-                  handleDelete={handleDeleteItemFromCart}
+          <StyledH1 className="ml-4 sm:ml-0 mb-4 md:mb-6">Cart</StyledH1>
+          <div className="md:flex md:justify-between md:gap-8 lg:gap-12">
+            <div className="sm:rounded overflow-hidden sm:border-l sm:border-r h-fit w-full">
+              {cart.map((item, index) => {
+                return (
+                  <CartProductCard
+                    isFirst={index < 1}
+                    key={item.id}
+                    product={item}
+                    handleDelete={handleDeleteItemFromCart}
+                  />
+                );
+              })}
+            </div>
+            <div className="bg-gray-50 p-4 border sm:rounded mt-12 md:mt-0 h-fit w-full md:max-w-[500px]">
+              <StyledH2>Summary</StyledH2>
+              <div className="flex flex-col gap-4">
+                <SummaryLine
+                  extraClasses=""
+                  title="Subtotal"
+                  number={totalSum}
                 />
-              );
-            })}
-          </div>
-          <div className="bg-gray-50 p-4 border">
-            <StyledH2>Summary</StyledH2>
+                <SummaryLine extraClasses="" title="Shipping" number={100} />
+                <div className="h-[2px] bg-gray-200 my-1"></div>
+                <SummaryLine
+                  extraClasses="font-bold"
+                  title="Total"
+                  number={totalSum + 100}
+                />
+              </div>
+              <ButtonLink
+                linkTo={"/checkout"}
+                size="w-full py-3 mb-2 mt-4 text-sm"
+                color="bg-amber-700 text-white"
+                hoverState="hover:bg-amber-800"
+              >
+                Go to checkout
+              </ButtonLink>
+              <ButtonLink
+                size="w-full py-3 text-sm"
+                color="border-2 border-amber-600 text-amber-700"
+                hoverState="hover:bg-amber-800 hover:border-amber-800 hover:text-white"
+                linkTo={"/"}
+              >
+                Keep shopping
+              </ButtonLink>
+            </div>
           </div>
         </Container>
       </Section>
-    </div>
+    </main>
   );
 };
 
 export default Cart;
+
+const SummaryLine = ({
+  title,
+  number,
+  extraClasses,
+}: {
+  title: string;
+  number: number;
+  extraClasses: string;
+}) => {
+  return (
+    <div className={`${extraClasses} flex justify-between`}>
+      <p>{title}</p>
+      <p>{number},-</p>
+    </div>
+  );
+};

@@ -17,7 +17,7 @@ const MenuButton = ({ isOpen, setIsOpen }: MenuButtonProps) => {
   return (
     <button
       onClick={() => setIsOpen(!isOpen)}
-      className="flex flex-col z-20 w-[24px] relative md:hidden"
+      className="flex flex-col z-50 w-[24px] relative md:hidden"
     >
       {/* Top */}
       <div
