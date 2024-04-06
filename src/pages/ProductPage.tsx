@@ -49,11 +49,21 @@ const ProductPage = () => {
   }
 
   if (status === "loading") {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="spinner"></div>
+      </div>
+    );
   }
 
   if (status === "error") {
-    return <p>Something went wrong</p>;
+    return (
+      <Section $noXPadding={false}>
+        <Container>
+          <p>Something went wrong</p>;
+        </Container>
+      </Section>
+    );
   }
 
   if (status === "success") {

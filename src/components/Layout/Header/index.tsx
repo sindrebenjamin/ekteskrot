@@ -26,7 +26,7 @@ const Header = () => {
           <MenuButton isOpen={isOpen} setIsOpen={setIsOpen} />
           <Logo />
         </div>
-        <Nav isOpen={isOpen} />
+        <Nav setIsOpen={setIsOpen} isOpen={isOpen} />
         <CartButton />
         <div
           onClick={() => setIsOpen(false)}
