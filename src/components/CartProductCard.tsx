@@ -28,27 +28,28 @@ const CartProductCard = ({
   return (
     <div className={`${cardClasses} p-4 bg-gray-50 border-b`}>
       <div className="flex justify-between">
-        <div>
+        <div className="flex flex-col gap-6 items-start">
           <p>{product.title}</p>
           <button
             onClick={() => handleDelete(product)}
-            className="text-amber-600 hover:text-amber-700 transition-colors duration-100 font-bold mt-4"
+            className="text-amber-600 hover:text-amber-700 transition-colors duration-100 font-bold"
           >
             Fjern
           </button>
+          <div className="flex gap-4">
+            <QuantitySelector
+              quantity={product.quantity}
+              handleQuantity={handleQuantity}
+            />
+            <p className="font-bold">{product.price},-</p>
+          </div>
         </div>
-
         <img
-          className="aspect-square w-24 object-cover"
+          className="aspect-square w-24 h-24 object-cover"
           src={product.image.url}
           alt={product.image.alt}
         />
       </div>
-      <QuantitySelector
-        quantity={product.quantity}
-        handleQuantity={handleQuantity}
-      />
-      <p className="font-bold">{product.price},-</p>
     </div>
   );
 };
