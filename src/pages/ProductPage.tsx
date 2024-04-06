@@ -85,7 +85,7 @@ const ProductPage = () => {
             imageUrl={product?.data.image.url ?? ""}
           />
           {/* Product details */}
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 ml-4 sm:ml-0">
             {/* Title and rating */}
             <div className="flex flex-col justify-between gap-2">
               {/* Title and price */}
@@ -105,7 +105,7 @@ const ProductPage = () => {
               />
               <Button
                 onClick={() => handleAddItemToCart(product?.data)}
-                size="w-fit px-12 py-4"
+                size="w-fit px-12 py-3"
                 color="bg-amber-600 text-white"
                 hoverState="hover:bg-amber-700"
               >
@@ -129,7 +129,9 @@ const ProductPage = () => {
       </Section>
       <Section $noXPadding={true}>
         <Container>
-          <StyledH2>Reviews ({product?.data.reviews.length})</StyledH2>
+          <StyledH2 className="ml-4 sm:ml-0">
+            Reviews ({product?.data.reviews.length})
+          </StyledH2>
           <div className="sm:rounded overflow-hidden sm:border-l sm:border-r">
             {noReviews && <p>No reviews yet.</p>}
             {!noReviews &&
