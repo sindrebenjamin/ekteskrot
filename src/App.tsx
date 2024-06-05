@@ -10,11 +10,13 @@ import Contact from "./pages/Contact";
 import PageNotFound from "./pages/PageNotFound";
 import { CartContext } from "./context/CartContext";
 import { Product } from "./interfaces";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const [cart, setCart] = useState<Product[]>([]);
   return (
     <>
+      <ScrollToTop />
       <CartContext.Provider value={{ cart, setCart }}>
         <Routes>
           <Route path="/*" element={<Layout />}>
